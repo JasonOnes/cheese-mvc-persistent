@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+
+<body class="container">
+
+<h1 th:text="${title}">Default Title</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+<p th:unless="${categories} and ${categories.size()}">NO Categories yet</p>
+
+
+<ul th:each="category : ${categories}">
+    <li><a th:text="${category.name}" th:href="@{'/cheese/category/' + ${category.id}}">edit</a></li>
+
+
+</ul>
+<a href="/category/add">Add a Category</a>
+<!--<a href="/category/remove">Cat Removal(don't get upset!!)</a> |-->
+</body>
+</html>

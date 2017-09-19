@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body>
+<h1 th:text="${title}">Edit this CHEESE!</h1>
+
+<nav th:replace="fragments :: navigation"></nav>
+
+
+<h3 th:text="|Edit ${cheesey.name}(id=${cheesey.id})|">Default heading reads cheese name and id </h3>
+<form method="post" th:object="${freshCheese}" action="/cheese/edit">
+    <input type="text" name="name"/>
+    <!--<span th:errors="*{name}"></span>-->
+    <!--&lt;!&ndash;value="${cheesey.name}"/>&ndash;&gt;-->
+    <p>And how does that taste, smell, sound, and feel rubbed on the soles of your feet?</p>
+    <textarea name="description" cols="20" rows="5"></textarea>
+
+    <p>What type of cheese is it?</p>
+    <label th:for="type">Type</label>
+    <!--<select th:field="*{type}">-->
+    <select name="catId">
+        <option th:each=" cheeseType : ${cheeseTypes}"
+                th:text="${cheeseType.name}"
+
+                th:value="${cheeseType.id}"></option>
+        <!--th:selected="${cheeseType.name.contains(cheese.type.name)}"-->
+    </select>
+
+    <input type="hidden" th:value="${cheesey.id}" name="cheeseId" />
+    <input type="submit" value="Say Cheese!" />
+
+</form>
+</body>
+</html>
